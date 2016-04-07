@@ -231,7 +231,7 @@ function DashManifestExtensions() {
 
     function getCodec(adaptation) {
         var representation = adaptation.Representation_asArray[0];
-		if (representation.codecs === undefined || representation.codecs == 'mp3')
+        if (representation.codecs === undefined || representation.codecs == 'mp3')
             return (representation.mimeType);
         return (representation.mimeType + ';codecs="' + representation.codecs + '"');
     }

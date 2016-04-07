@@ -161,7 +161,7 @@ function ScheduleController(config) {
 
     function startOnReady() {
         if (initialPlayback) {
-            for(var i = 0; i < abrController.getBitrateList(currentRepresentationInfo.mediaInfo).length; i++)
+            for (var i = 0; i < abrController.getBitrateList(currentRepresentationInfo.mediaInfo).length; i++)
               getInitRequest(i);
             //getInitRequest(currentRepresentationInfo.quality);
         }
