@@ -86,6 +86,22 @@ module.exports = function (grunt) {
                 ],
                 dest: 'dist/',
                 filter: 'isFile'
+            },
+            script: {
+                expand: true,
+                cwd: 'build/temp/',
+                src: [
+                    'dash.all.min.js',
+                    'dash.mediaplayer.min.js',
+                    'dash.protection.min.js',
+                    'dash.all.debug.js',
+                    'dash.reportinh.min.js',
+                    'dash.mediaplayer.debug.js',
+                    'dash.protection.debug.js',
+					'dash.reporting.debug.js'
+                ],
+                dest: '../PlaySite/VideoPlayer/script/dash.js',
+                filter: 'isFile'
             }
         },
         exorcise: {
@@ -222,6 +238,15 @@ module.exports = function (grunt) {
             all: {
                 'pre-commit': 'lint'
             }
+        },
+        connect: {
+            server: {
+                options: {
+                    livereload: true,
+                    base: 'build/temp',
+                    port: 9009
+                }
+            }
         }
     });
 
@@ -230,7 +255,7 @@ module.exports = function (grunt) {
     grunt.registerTask('dist',      ['clean', 'jshint', 'jscs', 'browserify:mediaplayer' , 'browserify:protection', 'browserify:reporting', 'browserify:all', 'minimize', 'copy:dist']);
     grunt.registerTask('minimize',  ['exorcise', 'uglify']);
     grunt.registerTask('test',      ['mocha_istanbul:test']);
-    grunt.registerTask('watch',     ['browserify:watch']);
+    grunt.registerTask('watch',     ['connect:server', 'browserify:watch']);
     grunt.registerTask('release',   ['default', 'jsdoc']);
     grunt.registerTask('debug',     ['clean', 'browserify:all', 'exorcise:all', 'copy:dist']);
     grunt.registerTask('lint',      ['jshint', 'jscs']);

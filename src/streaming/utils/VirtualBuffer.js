@@ -68,6 +68,8 @@ function VirtualBuffer() {
         data[streamId][mediaType][segmentType].push(chunk);
         sortArrayByProperty(data[streamId][mediaType][segmentType], 'index');
 
+        console.log('==' + chunk.index + '=======>' + data.defaultId.audio.appended);
+
         if (!isNaN(start) && !isNaN(end)) {
             data[streamId][mediaType].calculatedBufferedRanges.add(start, end);
             eventBus.trigger(Events.CHUNK_APPENDED, {chunk: chunk, sender: this});
